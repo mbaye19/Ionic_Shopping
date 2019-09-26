@@ -12,9 +12,9 @@
 
 <ion-content fullScreen>
   <ion-list>
-    <button ion-item *ngFor=" let article of cartItems; let i = index" >
+    <button ion-item  *ngFor=" let article of cartItems; let i = index" >
       <ion-thumbnail item-left>
-        <img [src]="article.item.pictures[0]">
+        <img [src]="article.item.pictures[0]" #picture (click)="showImage(picture, $event)">
       </ion-thumbnail>
       <h2>{{article.item.title}}</h2>
       <p>

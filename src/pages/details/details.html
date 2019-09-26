@@ -17,7 +17,7 @@
     <ion-card>
         <ion-slides pager autoplay='1500' loop='true'>
             <ion-slide *ngFor="let picture of productDetails.pictures">
-                <img class="myImg" [src]="picture">
+                <img class="myImg" [src]="picture" #pic (click)="showImage(pic, $event)">
             </ion-slide>
         </ion-slides>
         <ion-card-content>

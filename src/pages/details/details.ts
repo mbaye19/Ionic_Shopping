@@ -4,6 +4,7 @@ import { Product } from '../../models/interface-product';
 import { Storage } from '@ionic/storage';
 import { itemCart } from '../../models/interface-itemCart';
 import { CartPage } from '../cart/cart';
+import { MethodProvider } from '../../providers/method/method';
 
 
 @IonicPage()
@@ -17,7 +18,8 @@ export class DetailsPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public event: Events, public storage: Storage,
-              public toast: ToastController, public modal: ModalController) {
+              public toast: ToastController, public modal: ModalController,
+              public method: MethodProvider) {
     this.productDetails = this.navParams.get('data');
     this.event.subscribe('star-rating:changed', (note: any) =>{
       console.log(note);
@@ -84,6 +86,12 @@ export class DetailsPage {
   openCart(): void{
     this.modal.create(CartPage).present();
     
+  }
+
+  showImage(picture: any, event): void {
+    //  event.stopPropagation();
+    //   this.imageViewerCtrl.create(picture).present();
+    return this.method.showImage(picture, event);
   }
 
 }

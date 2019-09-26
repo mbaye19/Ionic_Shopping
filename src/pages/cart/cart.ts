@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, ToastController, AlertController, AlertOptions } from 'ionic-angular';
 import { itemCart } from '../../models/interface-itemCart';
 import { Storage } from '@ionic/storage';
+import { MethodProvider } from '../../providers/method/method';
 
 
 @IonicPage()
@@ -15,7 +16,8 @@ export class CartPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public viewCtrl: ViewController, public storage: Storage,
-              public toast: ToastController, public alert: AlertController) {
+              public toast: ToastController, public alert: AlertController,
+              public method: MethodProvider) {
   }
 
   ionViewDidLoad() {
@@ -75,5 +77,11 @@ export class CartPage {
     }
     this.alert.create(options).present();
     
+  }
+
+  showImage(picture: any, event): void {
+    //  event.stopPropagation();
+    //   this.imageViewerCtrl.create(picture).present();
+    return this.method.showImage(picture, event);
   }
 }

@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>CreateProduct</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content fullScreen>
+  <button ion-button full (click)="pickImages()">Ajouter Images</button>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Nom</ion-label>
+      <ion-input type="text" [(ngModel)]="myProduct.title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Description</ion-label>
+      <ion-input type="text" [(ngModel)]="myProduct.description"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Prix (en Dollars Americains)</ion-label>
+      <ion-input type="number" [(ngModel)]="myProduct.price"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Categorie du produit</ion-label>
+      <ion-select [(ngModel)] = "myProduct.category">
+        <ion-option [value]="cat.title" *ngFor="let cat of categories">{{cat.title}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Où se trouve le produit</ion-label>
+      <ion-select [(ngModel)] = "myProduct.city">
+        <ion-option [value]="city.name" *ngFor="let city of cities">{{city.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item-divider color="primary">
+      <ion-icon name="build" large></ion-icon>
+      Etat du produit
+    </ion-item-divider>
+    <ion-item>
+      <ion-label floating>Etat</ion-label>
+      <ion-select [(ngModel)]="myProduct.state">
+        <ion-option value="neuf">Neuf</ion-option>
+        <ion-option value="deja utilisé">Deja utilisé</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Mode d'acquisition</ion-label>
+      <ion-select [(ngModel)]="myProduct.availability.type">
+        <ion-option value="Livraison">Livraison</ion-option>
+        <ion-option value="Disponible en magasin">Dosponible en magasin</ion-option>
+        <ion-option value="Main en main">Main en Main</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="myProduct.availability.type === 'Livraison'">
+      <ion-label floating>Frais de livraison (en Dollars Americains)</ion-label>
+      <ion-input type="number" [(ngModel)]="myProduct.availability.feed"></ion-input>
+    </ion-item>
+    <button ion-button block (click)="create(myProduct)">Créer</button>
+  </ion-list>
+</ion-content>

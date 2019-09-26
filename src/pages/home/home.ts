@@ -3,6 +3,8 @@ import { NavController, AlertController, AlertOptions, ActionSheetController, Ac
 import { DetailsPage } from '../details/details';
 import { Product } from '../../models/interface-product';
 import { ImageViewerController } from 'ionic-img-viewer';
+import { MethodProvider } from '../../providers/method/method';
+import { CreateProductPage } from '../create-product/create-product';
 
 @Component({
   selector: 'page-home',
@@ -13,14 +15,15 @@ export class HomePage {
   Articles: Product[];
   constructor(public navCtrl: NavController,
     public alertCtrl: AlertController,
-    public ActionCtrl: ActionSheetController, public imageViewerCtrl: ImageViewerController) {
+    public ActionCtrl: ActionSheetController, public imageViewerCtrl: ImageViewerController,
+    public method: MethodProvider) {
     //On simule le fait que les articles proviennent d'une base de données
     this.Articles = [
       {
         title: 'Ordinateur de Bureau',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
         price: 75,
-        category: 'Informatique',
+        category: 'Electroniques',
         createAt: new Date(),
         state: 'neuf',
         city: 'Dakar',
@@ -43,7 +46,7 @@ export class HomePage {
         title: 'Téléphone',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
         price: 45,
-        category: 'Mobile',
+        category: 'Electroniques',
         createAt: new Date(),
         state: 'neuf',
         city: 'Kaolack',
@@ -67,7 +70,7 @@ export class HomePage {
         title: 'PC',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
         price: 450,
-        category: 'Informatique',
+        category: 'Electroniques',
         createAt: new Date(),
         state: 'neuf',
         city: 'Thies',
@@ -90,7 +93,7 @@ export class HomePage {
         title: 'Tablette',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
         price: 55,
-        category: 'Mobile',
+        category: 'Electroniques',
         createAt: new Date(),
         state: 'neuf',
         city: 'Mbour',
@@ -117,8 +120,13 @@ export class HomePage {
   }
 
   showImage(picture: any, event): void{
-    event.stopPropagation();
-     this.imageViewerCtrl.create(picture).present();
+  //  event.stopPropagation();
+  //   this.imageViewerCtrl.create(picture).present();
+  return this.method.showImage(picture, event);
+  }
+
+  showCreatePage(): void{
+    this.navCtrl.push(CreateProductPage);
   }
 
 }
